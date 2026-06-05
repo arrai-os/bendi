@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bendi · Clase 01 · Resumen + atajos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0b0a;
+    --bg-card: #141319;
+    --bg-card-soft: #1a1820;
+    --bg-elevated: #1f1d27;
+    --ink: #ece6d6;
+    --ink-soft: #b8b0a3;
+    --ink-mute: #6e6a60;
+    --gold: #c79a5f;
+    --gold-soft: #a8814f;
+    --gold-glow: #e3a86b;
+    --red-flag: #b85c4a;
+    --line: rgba(199,154,95,0.18);
+    --line-soft: #1e1c18;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.65;
+    letter-spacing: 0.005em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Grain overlay (exact spec) */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.045;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  /* Subtle vignette */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.5) 100%);
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    margin-bottom: 26px;
+    display: inline-block;
+  }
+
+  .eyebrow .dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    vertical-align: middle;
+    margin: 0 14px 3px 0;
+    box-shadow: 0 0 8px var(--gold-glow);
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.2em;
+  }
+
+  code.path {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(199,154,95,0.1);
+    padding: 2px 7px;
+    font-size: 13px;
+    color: var(--gold);
+    border-radius: 2px;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    padding: 92px 0 70px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+
+  .hero-meta {
+    position: absolute;
+    top: 40px;
+    left: 32px;
+    right: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(46px, 8vw, 104px);
+    line-height: 0.95;
+    font-weight: 300;
+    color: var(--ink);
+    letter-spacing: -0.035em;
+    margin-bottom: 40px;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  .hero-dateline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  .hero-sub {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 640px;
+    line-height: 1.5;
+  }
+
+  .hero-sub strong { color: var(--ink); font-weight: 500; }
+
+  /* SECTIONS */
+  section {
+    padding: 104px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 24px;
+    margin-bottom: 52px;
+    align-items: baseline;
+  }
+
+  .section-head h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .section-head h2 em {
+    font-style: normal;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .section-lead {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 740px;
+    line-height: 1.6;
+    margin-left: 108px;
+    margin-bottom: 48px;
+  }
+
+  /* LO QUE VIMOS — tracklist style */
+  .tracklist {
+    margin-left: 108px;
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .track {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 28px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: start;
+    transition: background 0.3s ease;
+  }
+
+  .track:hover { background: rgba(199, 154, 95, 0.025); }
+
+  .track-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    padding-top: 5px;
+  }
+
+  .track-body h4 {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .track-body p {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  .track-body p em { color: var(--gold); font-style: normal; }
+
+  /* SAUCE — gold nugget cards */
+  .sauce-grid {
+    margin-left: 108px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .sauce-card {
+    background: var(--bg-card);
+    border: 1px solid var(--line-soft);
+    border-left: 2px solid var(--gold-soft);
+    border-radius: 4px;
+    padding: 26px 30px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .sauce-card:hover {
+    border-color: var(--gold-soft);
+    border-left-color: var(--gold-glow);
+    transform: translateX(3px);
+  }
+
+  .sauce-card .nugget {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .sauce-card h4 {
+    font-size: 16.5px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.005em;
+  }
+
+  .sauce-card p {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+
+  .sauce-card p em { color: var(--gold); font-style: normal; }
+  .sauce-card code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(199,154,95,0.1);
+    padding: 1px 6px;
+    font-size: 12.5px;
+    color: var(--gold);
+    border-radius: 2px;
+  }
+
+  /* HOME PRACTICE */
+  .home-practice {
+    margin-left: 108px;
+    background: var(--bg-card);
+    padding: 48px;
+    border-radius: 4px;
+    border-left: 2px solid var(--gold);
+  }
+
+  .home-practice .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .home-practice h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+
+  .home-practice p {
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  .home-practice p strong { color: var(--ink); font-weight: 500; }
+  .home-practice p:last-child { margin-bottom: 0; }
+
+  .home-practice .quote {
+    border-left: 1px solid var(--line);
+    padding: 4px 0 4px 20px;
+    color: var(--gold);
+    font-style: italic;
+    margin: 24px 0;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+
+  /* CHEATSHEET */
+  .cheatsheet { margin-left: 108px; }
+
+  .midi-callout {
+    background: rgba(199,154,95,0.07);
+    border: 1px solid var(--gold-soft);
+    border-radius: 4px;
+    padding: 22px 26px;
+    margin-bottom: 44px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+
+  .midi-callout .ic {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .midi-callout p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .midi-callout p strong { color: var(--gold); font-weight: 500; }
+  .midi-callout .kbd-inline {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 1px 7px;
+    color: var(--ink);
+    box-shadow: 0 1.5px 0 rgba(0,0,0,0.4);
+    margin: 0 1px;
+  }
+
+  .cs-cat { margin-bottom: 40px; }
+
+  .cs-cat-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cs-cat-head .cs-cat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+  }
+
+  .cs-cat-head h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  .cs-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--bg-card);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px;
+    padding: 8px 11px;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    user-select: none;
+  }
+
+  .chip:hover, .chip.active {
+    border-color: var(--gold-soft);
+    background: var(--bg-card-soft);
+  }
+
+  .kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 24px;
+    padding: 0 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+    line-height: 1;
+  }
+
+  .chip .plus {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    margin: 0 1px;
+  }
+
+  .cs-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-mute);
+    font-style: italic;
+    padding: 8px 0 4px;
+    width: 100%;
+    line-height: 1.5;
+  }
+  .cs-note .ks {
+    font-style: normal;
+    color: var(--gold);
+    background: rgba(199,154,95,0.1);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* POPUP */
+  .cs-popup {
+    position: fixed;
+    z-index: 9000;
+    max-width: 280px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--gold-soft);
+    border-radius: 6px;
+    padding: 14px 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 18px rgba(227,168,107,0.12);
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.16s ease, transform 0.16s ease;
+    pointer-events: none;
+  }
+
+  .cs-popup.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cs-popup .pop-combo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    display: block;
+  }
+
+  /* SETUP NOTE */
+  .setup-note {
+    margin-left: 108px;
+    background: var(--bg-card);
+    border-radius: 4px;
+    border-top: 1px solid var(--gold-soft);
+    padding: 34px 40px;
+  }
+
+  .setup-note .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .setup-note p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 12px;
+    max-width: 700px;
+  }
+  .setup-note p:last-child { margin-bottom: 0; }
+  .setup-note p em { color: var(--gold); font-style: normal; }
+
+  /* NEXT CLASS */
+  .next-class {
+    margin-left: 108px;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-soft) 100%);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 40px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .next-class::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(199,154,95,0.07) 0%, transparent 70%);
+  }
+
+  .next-class .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .next-class h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+
+  .next-class h3 em { color: var(--gold); font-style: normal; font-weight: 500; }
+
+  /* FOOTER */
+  .footer {
+    padding: 64px 0 56px;
+    border-bottom: none;
+  }
+
+  .footer-sign {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    gap: 14px;
+  }
+  .footer-sign .sep { color: var(--gold-soft); }
+
+  /* RESPONSIVE */
+  @media (max-width: 760px) {
+    .container { padding: 0 22px; }
+    .section-head { grid-template-columns: 1fr; gap: 10px; }
+    .section-lead,
+    .tracklist,
+    .sauce-grid,
+    .home-practice,
+    .cheatsheet,
+    .setup-note,
+    .next-class { margin-left: 0; }
+    section { padding: 70px 0; }
+    .hero { min-height: 78vh; padding-top: 80px; }
+    .home-practice, .setup-note, .next-class { padding: 30px 24px; }
+    .midi-callout { flex-direction: column; gap: 10px; }
+    .track { grid-template-columns: 40px 1fr; gap: 18px; }
+    .cs-popup { max-width: 260px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-meta">
+      <span>BCN · ESTUDIO</span>
+      <span>CLASE 01 · RESUMEN</span>
+    </div>
+
+    <span class="eyebrow"><span class="dot"></span>PARA BENDI · DE FELIPE</span>
+
+    <h1 class="hero-title">
+      Mecánica<br>
+      y <em>ritmo</em>.
+    </h1>
+
+    <div class="hero-dateline">JUEVES 4 DE JUNIO · ESTUDIO</div>
+
+    <p class="hero-sub">
+      Arrancamos: <strong>Drum Rack, primer ritmo con Splice, choke, take lanes, clip envelopes y grooves</strong>. Esta página es tu resumen — qué practicamos esta semana y los atajos de Ableton para tenerlos siempre a mano. Guárdala. Ábrela cuando produzcas.
+    </p>
+  </div>
+</section>
+
+<!-- ============ LO QUE VIMOS ============ -->
+<section id="vimos">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Lo que <em>vimos</em></h2>
+    </div>
+
+    <p class="section-lead">
+      Toda la mecánica que tocamos en la clase, en una línea cada cosa — qué es y para qué te sirve. No hace falta que lo memorices: vuelve aquí cuando lo necesites.
+    </p>
+
+    <div class="tracklist">
+
+      <div class="track">
+        <div class="track-id">→ 01</div>
+        <div class="track-body">
+          <h4>Drum Rack</h4>
+          <p>El instrumento de batería de Ableton: cada pad carga un sample y se dispara con una nota MIDI. Es donde vive tu kit. Arrastras samples a los pads y ya tienes tu set de percusión listo para tocar.</p>
+        </div>
+      </div>
+
+      <div class="track">
+        <div class="track-id">→ 02</div>
+        <div class="track-body">
+          <h4>Tu primer ritmo con Splice</h4>
+          <p>Armamos el primer groove cargando samples de Splice directamente en los pads del Drum Rack. De cero a un beat tuyo, sin salir de Ableton.</p>
+        </div>
+      </div>
+
+      <div class="track">
+        <div class="track-id">→ 03</div>
+        <div class="track-body">
+          <h4>Choke (grupos de corte)</h4>
+          <p>Pads que se cortan entre sí: cuando uno suena, el otro se calla en seco. El uso clásico es el hi-hat abierto que se corta con el cerrado — como en un kit real. <em>El truco va más allá de los hats</em> (mira las salsas).</p>
+        </div>
+      </div>
+
+      <div class="track">
+        <div class="track-id">→ 04</div>
+        <div class="track-body">
+          <h4>Take lanes en el Arrangement</h4>
+          <p>Grabar varias pasadas de lo mismo mientras loopeas una sección, cada toma en su propio carril. Después eliges los mejores trozos de cada una sin perder ninguno.</p>
+        </div>
+      </div>
+
+      <div class="track">
+        <div class="track-id">→ 05</div>
+        <div class="track-body">
+          <h4>La pista versátil en Session</h4>
+          <p>Una pista de cabecera para grabar loops y capturar ideas rápido. Tu zona de aterrizaje: cuando aparece algo bueno, va directo ahí sin pensarlo.</p>
+        </div>
+      </div>
+
+      <div class="track">
+        <div class="track-id">→ 06</div>
+        <div class="track-body">
+          <h4>Clip Envelopes — Link / Unlink</h4>
+          <p>Automatización <em>dentro</em> del clip. En <strong>Link</strong> la curva sigue el largo del clip; en <strong>Unlink</strong> tiene su propio largo, independiente de las notas. El modo Unlink es la salsa polirrítmica de abajo.</p>
+        </div>
+      </div>
+
+      <div class="track">
+        <div class="track-id">→ 07</div>
+        <div class="track-body">
+          <h4>El motor de Splice</h4>
+          <p>Buscar, escuchar y arrastrar samples sin salir de Live. Las audiciones se sincronizan al tempo y se ajustan a tu tonalidad antes de soltarlas en el proyecto.</p>
+        </div>
+      </div>
+
+      <div class="track">
+        <div class="track-id">→ 08</div>
+        <div class="track-body">
+          <h4>Grooves / Groove Pool</h4>
+          <p>El "feel" y el swing. Extraes el groove de un loop con buena cadencia y lo aplicas a otras pistas para que todo respire igual. Es lo que separa un beat rígido de uno que mueve.</p>
+        </div>
+      </div>
+
+      <div class="track">
+        <div class="track-id">+ </div>
+        <div class="track-body">
+          <h4>Extras que rozamos</h4>
+          <p><strong>Capture MIDI</strong> como red de seguridad — improvisas sin nada armado, le das a Capture y Live agarra la última frase, detecta el tempo y arma el loop. <strong>Return chains</strong> del Drum Rack (hasta 6) para procesar en paralelo dentro del rack. <strong>Macros</strong> (hasta 16) para mapear cutoff + drive + reverb a un solo knob. Y <strong>Commit</strong> un groove para escribirlo definitivamente en el clip.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAUCE ============ -->
+<section id="salsas">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Guárdate estas <em>salsas</em></h2>
+    </div>
+
+    <p class="section-lead">
+      Las jugadas pro — lo no-obvio que separa a quien sabe dónde están los botones de quien sabe qué hacer con ellos. Pequeños trucos que valen oro. Pruébalos esta semana.
+    </p>
+
+    <div class="sauce-grid">
+
+      <div class="sauce-card">
+        <span class="nugget">◆ Salsa 01 · choke</span>
+        <h4>Choke más allá de los hats</h4>
+        <p>Mete un <em>sonido largo y evolutivo</em> (un barrido de ruido, vinyl crackle, una textura sostenida) en un choke group consigo mismo a través de dos pads — al retriggear lo trocea rítmicamente. Stutter gratis, sin ningún efecto. También puedes chokear un pad de textura contra un sample de "silencio" para gatear atmósferas cuando quieras.</p>
+      </div>
+
+      <div class="sauce-card">
+        <span class="nugget">◆ Salsa 02 · choke</span>
+        <h4>No chokees kick + snare juntos</h4>
+        <p>El choke es un corte duro — está mal para dos golpes centrales que deben sonar a la vez. El choke es para familias <em>de a uno</em>: hats, colas, barridos. El kick y el snare conviven, no se pelean.</p>
+      </div>
+
+      <div class="sauce-card">
+        <span class="nugget">◆ Salsa 03 · take lanes</span>
+        <h4>Comping con Audition + auto-fades</h4>
+        <p>Usa el <em>Audition Mode</em> (el icono de auriculares en el carril de toma) para escuchar una toma <em>en contexto</em> antes de comprometerla. Activa <em>Create Fades on Clip Edges</em> para que los trozos comped se crossfadeen solos (4 ms) — adiós a los clicks. El comping también funciona para MIDI: loop-grabas una línea improvisada y comeas las mejores frases.</p>
+      </div>
+
+      <div class="sauce-card">
+        <span class="nugget">◆ Salsa 04 · clip envelopes</span>
+        <h4>Unlinked = el LFO polirrítmico de Ableton</h4>
+        <p>Un loop de 1 compás con un envelope de cutoff <em>unlinked de 8 compases</em> evoluciona durante 8 compases mientras las notas se repiten cada 1 — nunca estático. Usa largos impares/primos (3, 5, 7 compases contra un clip de 1-2) para fraseos evolutivos estilo Mullaert. Apila varios a distintos largos (cutoff 7 / reverb-send 5 / pan 3) y tienes movimiento generativo sin una sola línea de automatización.</p>
+      </div>
+
+      <div class="sauce-card">
+        <span class="nugget">◆ Salsa 05 · groove</span>
+        <h4>El groove del hat, aplicado al bajo</h4>
+        <p>Extrae el groove de un loop de hats con swing y aplícalo <em>solo al bajo</em> al ~50-70% de Timing → el bajo se encaja en el pocket del hat ("todo respira junto"). Mantén el <em>Random bajo (5-15%)</em>: humaniza sin embarrar el kick. Vigila el valor <em>Base</em> — un base mal puesto pone el swing en la subdivisión equivocada.</p>
+      </div>
+
+      <div class="sauce-card">
+        <span class="nugget">◆ Salsa 06 · splice</span>
+        <h4>Splice "Search with Sound"</h4>
+        <p>Arrastra un clip de tu propia sesión al panel de Splice → Splice te devuelve loops que encajan con la tonalidad y el groove de tu track. Búsqueda al revés, en vez de cazar por palabras clave. Las audiciones vienen tempo-sync y conformadas a tu tono antes de comprometerlas.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOME PRACTICE ============ -->
+<section id="casa">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Lo de casa — <em>One Beat Per Day</em></h2>
+    </div>
+
+    <p class="section-lead">
+      Esta es la mitad del programa que no pasa en el estudio. Lo aprendí del curso de Mathew Jonson (Freedom Engine Academy) y es de las cosas más útiles que me han enseñado. Si lo haces de verdad, la diferencia es enorme.
+    </p>
+
+    <div class="home-practice">
+      <span class="label">PRÁCTICA DIARIA · 15-45 MIN</span>
+      <h3>Un beat por día. Aunque no te suene completo.</h3>
+      <p>La idea es simple: cada día te sientas un rato — pueden ser 15 minutos, puede ser una hora — y haces algo. Un loop, un bajo, una progresión, una textura, un patrón de percusión. <strong>No tiene que sonar bien. No tiene que terminarse. Solo tiene que existir.</strong></p>
+      <p>El objetivo no es producir tracks. Es que tu cerebro vuelva a entrar en el estado creativo sin resistencia. Es músculo. Cuando estás 3 meses sin sentarte, el primer minuto duele. Cuando llevas 30 días seguidos, te sientas y entras solo.</p>
+
+      <div class="quote">
+        "Da igual si suena a pedos. Es el hecho de que tu cerebro y tu ser poco a poco se empiecen a acostumbrar a estar en el estado creativo." — lo que te dije en la reunión.
+      </div>
+
+      <p><strong>Cómo se opera:</strong> guarda cada idea en una carpeta <code class="path">/one-beat-per-day/YYYY-MM-DD/</code>. El nombre del archivo da igual. Lo importante es que esté guardado. Cada cierto número de clases revisamos juntos lo que ha salido y elegimos qué desarrollar.</p>
+
+      <p><strong>Realismo:</strong> si un día no puedes, no pasa nada. La meta no es 365/365. Es <strong>no pasar más de 2 días sin sentarte</strong>. Eso es lo que rompe el momentum.</p>
+
+      <p style="margin-top:24px;color:var(--gold);font-size:14.5px;">Para la próxima clase: tráete uno de esos beats (o una idea del baúl) con el ritmo ya empezado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHEATSHEET ============ -->
+<section id="atajos">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Atajos de <em>Ableton 12</em> (Mac)</h2>
+    </div>
+
+    <p class="section-lead">
+      Pasa el ratón por encima de cualquier atajo (o tócalo en el móvil) y se abre la explicación. La idea no es memorizarlos todos — es que vayas robando dos o tres por semana hasta que se te queden en los dedos.
+    </p>
+
+    <div class="cheatsheet">
+
+      <div class="midi-callout">
+        <span class="ic">⚠ LÉEME PRIMERO</span>
+        <p>Los atajos de <strong>una sola letra</strong> (B, K, S, C, O, Q, R, W, H…) solo funcionan si el <strong>teclado MIDI del ordenador está apagado</strong> — se enciende/apaga con la tecla <span class="kbd-inline">M</span>. Si está encendido, esas teclas tocan notas en vez de disparar atajos. La solución rápida: mantén <span class="kbd-inline">⇧</span> + la letra, y funcionan igual.</p>
+      </div>
+
+      <div id="cs-cats"></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SETUP ============ -->
+<section id="setup">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>Setup</h2>
+    </div>
+
+    <div class="setup-note">
+      <span class="label">NOTA RÁPIDA</span>
+      <p><em>Splice activado en clase</em> — ya tienes el banco de samples y el drag-and-drop dentro de Live funcionando.</p>
+      <p>Un detalle técnico: los devices gratuitos de <strong>Max for Live</strong> solo cargan si tienes <strong>Live Suite</strong> (o el add-on de M4L por separado). Si en algún momento te topas con un device que no abre, suele ser por eso. Lo vemos si te interesa — sin prisa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT CLASS ============ -->
+<section id="proxima">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2>Próxima clase</h2>
+    </div>
+
+    <div class="next-class">
+      <span class="label">CLASE 02</span>
+      <h3><em>Kick · bass · sidechain</em> — la base que respira.</h3>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<section class="footer">
+  <div class="container">
+    <div class="footer-sign">
+      <span>ARC</span>
+      <span class="sep">·</span>
+      <span>PARA BENDI</span>
+      <span class="sep">·</span>
+      <span>2026-06-05</span>
+    </div>
+  </div>
+</section>
+
+<!-- floating popup -->
+<div class="cs-popup" id="csPopup" role="tooltip" aria-hidden="true"></div>
+
+<script>
+(function () {
+  // ---- Shortcut data parsed from shortcuts.md, explanations translated to ES ----
+  // token = key cap; lines with note:true render as a muted note, not a chip.
+  var DATA = [
+    {
+      cat: "Transporte y global",
+      items: [
+        { combo: "Space", es: "Reproduce desde el marcador de inserción / detiene si está sonando. Tu play-stop principal." },
+        { combo: "⇧ Space", es: "Continúa desde donde paraste (sin saltar atrás). Re-escuchas sin perder tu sitio." },
+        { combo: "⌥ Space", es: "Reproduce la selección actual y se detiene al final. (Win: Ctrl+Space)" },
+        { combo: "F9", es: "Activa/desactiva el botón global de Record." },
+        { combo: "⇧ F9", es: "Arma/desarma el Record del Arrangement. Pinchas grabación sobre la línea de tiempo." },
+        { combo: "⌘ ⇧ F9", es: "Activa el Session Record — captura el lanzamiento de clips en vivo dentro de Session." },
+        { combo: "F10", es: "Vuelta al Arrangement — re-engancha la línea de tiempo después de que los clips de Session la pisaran." },
+        { combo: "O", es: "Activa/desactiva el metrónomo." },
+        { combo: "M", es: "Activa/desactiva el teclado MIDI del ordenador (notas QWERTY). Apágalo cuando los atajos de letra dejen de funcionar." },
+        { combo: "F1 – F8", es: "Silencia/activa las pistas 1–8 sin usar el ratón (admite latching momentáneo)." },
+        { combo: "⌃ ⌥ ⇧ E", es: "Motor de audio on/off. Libera el dispositivo de audio para otra app sin cerrar Live." },
+        { note: true, es: "Tap Tempo · Capture MIDI — sin atajo por defecto; se mapean en ⌘K (Key Map mode)." }
+      ]
+    },
+    {
+      cat: "Edición",
+      items: [
+        { combo: "⌘ Z", es: "Deshacer." },
+        { combo: "⌘ ⇧ Z", es: "Rehacer. (Win: Ctrl+Y)" },
+        { combo: "⌘ X / ⌘ C / ⌘ V", es: "Cortar / Copiar / Pegar (en el Arrangement pega en el marcador de inserción)." },
+        { combo: "⌘ D", es: "Duplicar en el sitio — el caballo de batalla (clips, notas, escenas, devices)." },
+        { combo: "Delete", es: "Borra la selección / resetea un parámetro enfocado a su valor por defecto." },
+        { combo: "⌘ R", es: "Renombrar pista/clip/escena/device seleccionado (Tab → siguiente)." },
+        { combo: "⌘ A", es: "Seleccionar todo (depende del contexto)." },
+        { combo: "⌘ E", es: "Corta clip(s)/notas en el marcador de inserción. Mantén ⌘ + ↑/↓ para cambiar el número de trozos." },
+        { combo: "⌘ J", es: "Consolida la selección de tiempo en un solo clip / une notas MIDI." },
+        { combo: "⌘ ⇧ J", es: "Recorta el clip a la selección, descartando el audio/MIDI de fuera." },
+        { combo: "⌘ ⌥ J", es: "Ajusta las notas seleccionadas al rango de tiempo." }
+      ]
+    },
+    {
+      cat: "Drag con el ratón",
+      items: [
+        { combo: "⌘ drag", es: "Mueve un clip/evento FUERA de la grilla — mantén ⌘ mientras arrastras para ignorar el snap. La forma limpia de correr algo un pelo fuera del beat. (Win: Alt-drag)" },
+        { combo: "⌘ drag↕", es: "Sobre una nota MIDI, arrastra arriba/abajo con ⌘ para fijar su velocity directo en el editor — sin abrir el carril de velocity. (Win: Alt-drag)" },
+        { combo: "⌥ drag", es: "Duplicar — arrastras una copia del clip o de la(s) nota(s) seleccionada(s) a otro sitio. (Win: Ctrl-drag)" },
+        { combo: "⇧ drag", es: "Resolución fina — arrastre de alta precisión de cualquier valor (warp markers, breakpoints, fades, perillas)." },
+        { combo: "⌥ drag curva", es: "Sobre un tramo de automatización entre dos breakpoints, arrastra para curvarlo." },
+        { combo: "⇧⌥ drag", es: "Desliza el audio por debajo de sus warp markers dentro del clip — mueves la onda y dejas los markers fijos. (Win: ⇧Alt-drag)" },
+        { combo: "⇧ drag barra", es: "Arrastra la barra de título de un clip warpeado para estirarlo en el tiempo." },
+        { combo: "⌘⌥ drag", es: "Hace scroll de la vista Arrangement/clip a izquierda-derecha más allá de la selección. (Win: Ctrl+Alt-drag)" },
+        { combo: "drag borde", es: "Arrastra el borde izquierdo/derecho de una nota MIDI (sin modificador) para cambiar su duración." }
+      ]
+    },
+    {
+      cat: "Vista Session",
+      items: [
+        { combo: "Enter", es: "Lanza el clip/slot seleccionado." },
+        { combo: "⌘ ⇧ M", es: "Inserta un clip MIDI vacío — empiezas a escribir sin arrastrar nada. Te ahorra tiempo cada día." },
+        { combo: "⌘ I", es: "Inserta una escena debajo de la selección." },
+        { combo: "⌘ ⇧ I", es: "Inserta una escena capturada (foto de los clips que están sonando ahora)." },
+        { combo: "⌘ E", es: "Añade/quita un botón de Stop en el slot." },
+        { combo: "⌘ Enter", es: "Detiene el clip que suena en esa pista." },
+        { combo: "0", es: "Desactiva/reactiva el clip seleccionado (on/off por clip)." },
+        { combo: "Page Up / Down", es: "Salta la selección de escenas de 8 en 8." }
+      ]
+    },
+    {
+      cat: "Vista Arrangement",
+      items: [
+        { combo: "Tab", es: "Alterna Arrangement ↔ Session." },
+        { combo: "⌘ L", es: "Activa el Loop Brace sobre la selección." },
+        { combo: "⌘ ⇧ L", es: "Selecciona el material que hay bajo el Loop Brace." },
+        { combo: "⌘ I", es: "Insertar Silencio — empuja todo lo que hay después de la selección hacia la derecha, por su largo. Abre un hueco para una sección nueva." },
+        { combo: "⌘ ⇧ X", es: "Cortar Tiempo — quita el rango y trae el material posterior hacia la izquierda." },
+        { combo: "⌘ ⇧ V", es: "Pegar Tiempo — inserta el tiempo cortado/copiado y desplaza el material posterior a la derecha." },
+        { combo: "⌘ ⇧ D", es: "Duplicar Tiempo — \"repite toda esta sección\" en todas las pistas." },
+        { combo: "⌘ ⇧ Delete", es: "Borrar Tiempo — borra el rango y cierra el hueco." },
+        { combo: "R", es: "Invierte el clip de audio seleccionado. Risers y fills rápidos." },
+        { combo: "Z / X", es: "Zoom a la selección de tiempo / zoom hacia fuera." },
+        { combo: "⌘ ⌥ F", es: "Crea un fade/crossfade en los clips seleccionados. Quita pops y hace transiciones rápido." }
+      ]
+    },
+    {
+      cat: "MIDI / Notas",
+      items: [
+        { combo: "⌘ A", es: "Selecciona todas las notas. ⌘⇧A invierte la selección." },
+        { combo: "⌥ drag", es: "Copia notas arrastrándolas. (Win: Ctrl-drag)" },
+        { combo: "B", es: "Activa el Draw Mode (lápiz) — pintas/dibujas notas por pasos." },
+        { combo: "K", es: "Resalta la escala activa (atenúa las filas fuera de escala). Te mantiene en tono." },
+        { combo: "↑ / ↓", es: "Transpone un semitono. ⇧↑/↓ transpone una octava." },
+        { combo: "⌥ ↑ / ↓", es: "Selecciona la nota siguiente/anterior por altura. ⌥←/→ por tiempo dentro de una fila de altura." },
+        { combo: "⌘ U", es: "Cuantiza según el ajuste actual. ⌘⇧U abre los ajustes de Quantize (grilla/fuerza/swing)." },
+        { combo: "⌘ ↑ / ↓", es: "Ajusta la velocity. ⌘⇧↑/↓ ajusta la desviación de velocity (rango de humanización)." },
+        { combo: "⌘ ⌥ ↑ / ↓", es: "Ajusta el Chance (probabilidad por nota) — el feel generativo de Live 12." },
+        { combo: "0 – 127 + Enter", es: "Teclea un número y pone las notas seleccionadas a esa velocity exacta." },
+        { combo: "⌘ J", es: "Une notas en una sola. ⌘⌥J las ajusta al rango de tiempo." },
+        { combo: "W / H", es: "Zoom para ajustar el ancho / alto del contenido del clip." },
+        { combo: "⌘ ⌥ E", es: "Alterna el editor de Clip/MIDI a tamaño completo." }
+      ]
+    },
+    {
+      cat: "Warp / Audio",
+      items: [
+        { combo: "⌘ I", es: "Inserta un Warp Marker. ⌘⇧I inserta un marcador de transiente." },
+        { combo: "← / →", es: "Mueve el Warp Marker seleccionado. ⌘←/→ selecciona el marcador anterior/siguiente." },
+        { combo: "W / H", es: "Ajusta el ancho / alto del sample. Z / X hace zoom a / desde la selección." },
+        { note: true, es: "÷2 / ×2 del tempo del clip — son botones en la caja del Clip; mapéalos en ⌘K." }
+      ]
+    },
+    {
+      cat: "Automatización",
+      items: [
+        { combo: "A", es: "Activa el Automation Mode en el Arrangement (muestra/edita los carriles)." },
+        { combo: "B", es: "Draw Mode — dibuja los pasos del envelope a lápiz." },
+        { combo: "⌥ drag", es: "Curva un segmento de automatización (mantén ⌥ sobre un segmento y arrastra para doblarlo). (Win: Alt)" },
+        { combo: "⇧ drag", es: "Resolución más fina sobre un breakpoint." }
+      ]
+    },
+    {
+      cat: "Dispositivos / Browser",
+      items: [
+        { combo: "⌘ G", es: "Agrupa devices en un Rack (Instrument/Audio/Drum). Movimiento clave del sound design." },
+        { combo: "⌘ ⇧ G", es: "Desagrupa un Rack." },
+        { combo: "⌘ ⌥ ⇧ F", es: "Congela/descongela la pista (renderiza para liberar CPU). (Flatten = menú contextual, sin tecla.)" },
+        { combo: "Q", es: "Hot-Swap Mode — escuchas reemplazos del browser en vivo." },
+        { combo: "⌘ ⌥ P", es: "Muestra/oculta la ventana flotante del plug-in (mantén ⌘ + clic para abrir varias)." },
+        { combo: "⌘ ⌥ B / ⌥ 5", es: "Muestra/oculta el Browser / pone el foco en él." },
+        { combo: "⌘ F", es: "Busca en el Browser." },
+        { combo: "⌘ [ / ⌘ ]", es: "Historial del Browser: atrás / adelante." },
+        { combo: "Enter", es: "Carga el ítem seleccionado del browser." }
+      ]
+    },
+    {
+      cat: "Mezclador",
+      items: [
+        { combo: "⌘ ⌥ M", es: "Muestra/oculta el Mixer en Session." },
+        { combo: "S", es: "Solo de la pista seleccionada. C = Arm (record-enable). 0 = Mute." },
+        { combo: "⌘ ⌥ I / ⌘ ⌥ S / ⌘ ⌥ O", es: "Muestra/oculta las secciones In-Out / Sends / Overview." }
+      ]
+    },
+    {
+      cat: "Vista / Navegación",
+      items: [
+        { combo: "Tab", es: "Session ↔ Arrangement. ⇧Tab (o F12) alterna detalle de Device ↔ Clip." },
+        { combo: "⌘ F", es: "Pantalla completa. (Win: F11)" },
+        { combo: "⌘ ⇧ W", es: "Activa la Segunda Ventana (dos monitores: Session en uno, Arrangement en el otro)." },
+        { combo: "⌘ ⌥ 3 / ⌘ ⌥ 4", es: "Muestra/oculta el detalle de Clip View / Device View." },
+        { combo: "⌥ 1 … 8", es: "Pon el foco en un área (1 Session · 2 Arrangement · 3 Clip · 4 Device · 5 Browser · 6 Groove Pool · 7 Learn · 8 Clip panel)." },
+        { combo: "+ / -", es: "Zoom de la regla de tiempo. ⌘+ / ⌘- hacen zoom de toda la interfaz." },
+        { combo: "⌥ ⇧ F", es: "Follow playback (mantiene el playhead en pantalla)." },
+        { combo: "⌘ ,", es: "Ajustes/Preferencias. Esc cancela / cierra diálogo / salta el foco al título de pista." }
+      ]
+    },
+    {
+      cat: "Trucos pro",
+      items: [
+        { combo: "⌘ ⇧ M", es: "Inserta un clip MIDI vacío — arrancas una idea al instante." },
+        { combo: "⌘ B", es: "Bounce de los clip(s) seleccionados a una pista de audio nueva (resample dentro de la caja). ⌘⌥V pega el audio bounced en el sitio." },
+        { combo: "⌘ 1 / ⌘ 2 / ⌘ 3", es: "Grilla más estrecha / más ancha / tresillo." },
+        { combo: "⌘ 4", es: "Snap a grilla on/off. ⌘5 alterna grilla fija vs adaptativa al zoom." },
+        { combo: "⌘ 6 … ⌘ 0", es: "Cuantización de lanzamiento: 1/16 · 1/8 · 1/4 · 1 compás · Off." },
+        { combo: "⌘ T / ⌘ ⇧ T / ⌘ ⌥ T", es: "Inserta pista de Audio / MIDI / Return." },
+        { combo: "⌘ ⌃ U", es: "Muestra los Take Lanes (comping de audio). ⌘⌃↑/↓ intercambia la toma principal con la siguiente/anterior." },
+        { combo: "K", es: "Resaltado de escala (con el modo scale-aware de Live 12 = escritura diatónica sin esfuerzo)." }
+      ]
+    }
+  ];
+
+  // tokens that are modifier/symbol keycaps vs separators
+  function tokenize(combo) {
+    // split on spaces, but keep "/" and "+" and "…" / "-" groups readable as their own caps
+    var raw = combo.split(/\s+/).filter(Boolean);
+    return raw;
+  }
+
+  function buildChip(item) {
+    var chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.setAttribute('tabindex', '0');
+    var toks = tokenize(item.combo);
+    toks.forEach(function (t) {
+      if (t === '/' || t === '+' || t === '…') {
+        var sep = document.createElement('span');
+        sep.className = 'plus';
+        sep.textContent = t === '+' ? '+' : (t === '/' ? '/' : '…');
+        chip.appendChild(sep);
+      } else {
+        var k = document.createElement('span');
+        k.className = 'kbd';
+        k.textContent = t;
+        chip.appendChild(k);
+      }
+    });
+    chip.dataset.combo = item.combo;
+    chip.dataset.es = item.es;
+    return chip;
+  }
+
+  var host = document.getElementById('cs-cats');
+  DATA.forEach(function (cat, idx) {
+    var block = document.createElement('div');
+    block.className = 'cs-cat';
+
+    var head = document.createElement('div');
+    head.className = 'cs-cat-head';
+    var num = document.createElement('span');
+    num.className = 'cs-cat-num';
+    num.textContent = (idx + 1 < 10 ? '0' : '') + (idx + 1);
+    var h3 = document.createElement('h3');
+    h3.textContent = cat.cat;
+    head.appendChild(num);
+    head.appendChild(h3);
+    block.appendChild(head);
+
+    var chips = document.createElement('div');
+    chips.className = 'cs-chips';
+
+    cat.items.forEach(function (item) {
+      if (item.note) {
+        var note = document.createElement('div');
+        note.className = 'cs-note';
+        note.innerHTML = item.es.replace(/⌘K/g, '<span class="ks">⌘K</span>') +
+          ' &nbsp;<span class="ks">sin atajo por defecto — se mapea en ⌘K</span>';
+        chips.appendChild(note);
+      } else {
+        chips.appendChild(buildChip(item));
+      }
+    });
+
+    block.appendChild(chips);
+    host.appendChild(block);
+  });
+
+  // ---- Popup positioner ----
+  var popup = document.getElementById('csPopup');
+  var activeChip = null;
+  var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+  function showPopup(chip) {
+    activeChip = chip;
+    chip.classList.add('active');
+    popup.innerHTML = '<span class="pop-combo">' + escapeHtml(chip.dataset.combo) + '</span>' + escapeHtml(chip.dataset.es);
+    popup.setAttribute('aria-hidden', 'false');
+    // measure
+    popup.style.left = '-9999px';
+    popup.style.top = '0px';
+    popup.classList.add('show');
+    position(chip);
+  }
+
+  function position(chip) {
+    var r = chip.getBoundingClientRect();
+    var pw = popup.offsetWidth;
+    var ph = popup.offsetHeight;
+    var vw = document.documentElement.clientWidth;
+    var vh = document.documentElement.clientHeight;
+    var margin = 10;
+    var gap = 10;
+
+    // horizontal: center on chip, clamp to viewport
+    var left = r.left + (r.width / 2) - (pw / 2);
+    if (left < margin) left = margin;
+    if (left + pw > vw - margin) left = vw - margin - pw;
+
+    // vertical: prefer above, flip below if not enough room
+    var top = r.top - ph - gap;
+    if (top < margin) {
+      top = r.bottom + gap;
+      // if also overflows bottom, clamp
+      if (top + ph > vh - margin) top = Math.max(margin, vh - margin - ph);
+    }
+
+    popup.style.left = left + 'px';
+    popup.style.top = top + 'px';
+  }
+
+  function hidePopup() {
+    popup.classList.remove('show');
+    popup.setAttribute('aria-hidden', 'true');
+    if (activeChip) { activeChip.classList.remove('active'); }
+    activeChip = null;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
+    });
+  }
+
+  // Event delegation on the cheatsheet host
+  if (!isTouch) {
+    host.addEventListener('mouseover', function (e) {
+      var chip = e.target.closest('.chip');
+      if (chip && chip !== activeChip) showPopup(chip);
+    });
+    host.addEventListener('mouseout', function (e) {
+      var chip = e.target.closest('.chip');
+      if (chip) {
+        // only hide if leaving toward something that isn't this chip
+        var to = e.relatedTarget;
+        if (!chip.contains(to)) hidePopup();
+      }
+    });
+    // keyboard focus support
+    host.addEventListener('focusin', function (e) {
+      var chip = e.target.closest('.chip');
+      if (chip) showPopup(chip);
+    });
+    host.addEventListener('focusout', function (e) {
+      var chip = e.target.closest('.chip');
+      if (chip) hidePopup();
+    });
+  }
+
+  // Tap / click toggle (works on touch + desktop click)
+  host.addEventListener('click', function (e) {
+    var chip = e.target.closest('.chip');
+    if (!chip) return;
+    e.stopPropagation();
+    if (activeChip === chip) {
+      hidePopup();
+    } else {
+      if (activeChip) activeChip.classList.remove('active');
+      showPopup(chip);
+    }
+  });
+
+  // tap elsewhere closes
+  document.addEventListener('click', function (e) {
+    if (activeChip && !e.target.closest('.chip') && !e.target.closest('#csPopup')) {
+      hidePopup();
+    }
+  });
+
+  // reposition on scroll/resize while open
+  window.addEventListener('scroll', function () { if (activeChip) position(activeChip); }, { passive: true });
+  window.addEventListener('resize', function () { if (activeChip) position(activeChip); });
+
+  // Esc closes
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && activeChip) hidePopup();
+  });
+})();
+</script>
+
+</body>
+</html>
