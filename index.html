@@ -628,7 +628,52 @@
     .midi-callout { flex-direction: column; gap: 10px; }
     .track { grid-template-columns: 40px 1fr; gap: 18px; }
     .cs-popup { max-width: 260px; }
+    .class-nav { gap: 8px; }
+    .class-tab { padding: 10px 14px; }
   }
+
+  /* CLASS SWITCHER */
+  .class-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    gap: 12px;
+    padding: 16px 32px;
+    max-width: 920px;
+    margin: 0 auto;
+    background: rgba(12,11,10,0.86);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .class-tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    background: transparent;
+    border: 1px solid var(--line-soft);
+    border-radius: 2px;
+    padding: 11px 18px;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    line-height: 1.3;
+    text-align: left;
+  }
+  .class-tab:hover { color: var(--ink-soft); border-color: var(--line); }
+  .class-tab.active {
+    color: var(--bg);
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 16px var(--gold-glow);
+  }
+  .class-tab .ct-num { display: block; font-size: 10px; opacity: 0.7; margin-bottom: 2px; }
+  .class-pane { display: none; }
+  .class-pane.active { display: block; animation: paneIn 0.4s ease; }
+  @keyframes paneIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
@@ -638,23 +683,184 @@
   <div class="container">
     <div class="hero-meta">
       <span>BCN · ESTUDIO</span>
-      <span>CLASE 01 · RESUMEN</span>
+      <span>CLASE 02 · RESUMEN</span>
     </div>
 
     <span class="eyebrow"><span class="dot"></span>PARA BENDI · DE FELIPE</span>
 
     <h1 class="hero-title">
-      Mecánica<br>
-      y <em>ritmo</em>.
+      El sonido<br>
+      que <em>respira</em>.
     </h1>
 
-    <div class="hero-dateline">JUEVES 4 DE JUNIO · ESTUDIO</div>
+    <div class="hero-dateline">JUEVES 11 DE JUNIO · ESTUDIO</div>
 
     <p class="hero-sub">
-      Arrancamos: <strong>Drum Rack, primer ritmo con Splice, choke, take lanes, clip envelopes y grooves</strong>. Esta página es tu resumen — qué practicamos esta semana y los atajos de Ableton para tenerlos siempre a mano. Guárdala. Ábrela cuando produzcas.
+      Hoy le dimos <strong>vida a un sonido</strong>: usamos instrumentos como señal para disparar gates, esculpimos un pad plano hasta volverlo rítmico, y montamos racks de audio y de MIDI para que el sonido <strong>se mueva y exprese</strong>. Toda la clase sobre tu propia idea. Abajo tienes el resumen de las dos clases — cambia de pestaña.
     </p>
   </div>
 </section>
+
+<!-- ============ CLASS SWITCHER ============ -->
+<nav class="class-nav" id="classNav">
+  <button class="class-tab active" data-pane="pane-2">
+    <span class="ct-num">CLASE 02 · 11 JUN</span>
+    El sonido que respira
+  </button>
+  <button class="class-tab" data-pane="pane-1">
+    <span class="ct-num">CLASE 01 · 4 JUN</span>
+    Mecánica y ritmo
+  </button>
+</nav>
+
+<!-- ============ CLASS 02 PANE ============ -->
+<div class="class-pane active" id="pane-2">
+
+  <!-- LO QUE VIMOS · C2 -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>Lo que <em>vimos</em></h2>
+      </div>
+      <p class="section-lead">
+        Toda la clase salió de tu beat y de una referencia que trajiste. Partimos de un sonido plano y lo fuimos despertando. Aquí está cada pieza, en una línea.
+      </p>
+      <div class="tracklist">
+        <div class="track">
+          <div class="track-id">&rarr; 01</div>
+          <div class="track-body">
+            <h4>Partir de una referencia</h4>
+            <p>Trajiste un track house con unos pads rítmicos preciosos. Agarramos ese "hook" como norte y nos pusimos a recrear esa sensación sobre la idea que hiciste la semana pasada. <em>La referencia no se copia — se usa de brújula.</em></p>
+          </div>
+        </div>
+        <div class="track">
+          <div class="track-id">&rarr; 02</div>
+          <div class="track-body">
+            <h4>Instrumentos como señal de trigger</h4>
+            <p>El concepto clave del día: una pista de percusión (usamos un kit de <strong>808</strong>) puede ser la <em>señal</em> que dispara un efecto en otra pista. No suena para que lo oigas — manda. Su ritmo controla otra cosa.</p>
+          </div>
+        </div>
+        <div class="track">
+          <div class="track-id">&rarr; 03</div>
+          <div class="track-body">
+            <h4>Un Gate disparado por el 808 (sidechain, callback C1)</h4>
+            <p>Trajimos el <strong>sidechain</strong> de la clase pasada, pero ahora sobre un <strong>Gate</strong> puesto en un pad con acordes. El 808 abre y cierra el pad al ritmo que tú decidas. El pad plano empezó a recortarse, a pulsar, a estar vivo.</p>
+          </div>
+        </div>
+        <div class="track">
+          <div class="track-id">&rarr; 04</div>
+          <div class="track-body">
+            <h4>Esculpir el sonido a medida</h4>
+            <p>Como tú eliges <em>qué notas y qué ritmo</em> disparan el gate, esculpes la forma del pad con control total. Cambiamos el patrón del trigger y el mismo pad cambió de personalidad. Esto es diseño de sonido sin tocar el preset.</p>
+          </div>
+        </div>
+        <div class="track">
+          <div class="track-id">&rarr; 05</div>
+          <div class="track-body">
+            <h4>Audio Effect Racks para control en vivo</h4>
+            <p>Montamos racks de efectos para darle expresión al pad: uno con <strong>reverb + saturación + filtro</strong>, otro con <strong>delays</strong>, y tú armaste uno con <strong>Roar</strong>. Con los macros, una mano mueve todo el carácter del sonido en vivo.</p>
+          </div>
+        </div>
+        <div class="track">
+          <div class="track-id">&rarr; 06</div>
+          <div class="track-body">
+            <h4>MIDI Effect Racks — la cadena que propone</h4>
+            <p>Encadenamos efectos MIDI (<strong>Arpeggiator · Scale · Chord · Note Echo</strong> y más) y tocamos el piano por encima. De una sola nota salieron frases e ideas que nunca habríamos escrito a mano. La cadena propone, tú eliges.</p>
+          </div>
+        </div>
+        <div class="track">
+          <div class="track-id">&rarr; 07</div>
+          <div class="track-body">
+            <h4>El sonido como personaje</h4>
+            <p>Lo grande del día: el pad que no te convencía no estaba roto — le <em>faltaba movimiento</em>. Un sonido tiene personalidad. Tu trabajo es darle herramientas para expresarse: etapas, momentos, que sea más agresivo, más tierno, más crujiente según el track lo pida.</p>
+          </div>
+        </div>
+        <div class="track">
+          <div class="track-id">&rarr; 08</div>
+          <div class="track-body">
+            <h4>Duplicar el trigger y jugar con los espacios</h4>
+            <p>Duplicamos el clip que disparaba el gate para una segunda capa (otro 808 / unos rides). El truco: <strong>apaga las notas originales en el clip nuevo y rellena los huecos</strong> que quedan en medio — sin repetir los mismos sitios. Las dos capas se completan y rebotan perfecto. El espacio también es un instrumento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SALSAS · C2 -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Guárdate estas <em>salsas</em></h2>
+      </div>
+      <p class="section-lead">
+        Las jugadas del día — lo no-obvio que hace que un sonido cobre vida. Pruébalas esta semana sobre tus beats.
+      </p>
+      <div class="sauce-grid">
+        <div class="sauce-card">
+          <span class="nugget">◆ Salsa 01 · trigger</span>
+          <h4>Cualquier instrumento puede ser la llave</h4>
+          <p>No estás limitado al kick para sidechain. Un <em>808, un ride, una palma, un loop de percusión</em> — cada uno, usado como señal de un gate o un sidechain, esculpe un ritmo distinto sobre tu pad. Cambias el trigger, cambias la vida del sonido. Ten una carpeta de "triggers" como tienes una de samples.</p>
+        </div>
+        <div class="sauce-card">
+          <span class="nugget">◆ Salsa 02 · espacios</span>
+          <h4>Rellena los huecos, no los repitas</h4>
+          <p>Cuando dupliques un patrón para una segunda capa: <em>apaga las notas del primero y pon notas solo donde había silencio</em>. Dos patrones que encajan como piezas, en vez de pisarse. Eso es lo que hace que todo "rebote". El groove vive en lo que <em>no</em> suena.</p>
+        </div>
+        <div class="sauce-card">
+          <span class="nugget">◆ Salsa 03 · movimiento</span>
+          <h4>El pad plano no está roto — le falta moverse</h4>
+          <p>Antes de cambiar de preset, pregúntate: <em>¿se mueve?</em> Gate rítmico, filtro automatizado, un envelope que evoluciona, un poco de reverb que entra y sale. El 90% de los "pads que no me gustan" solo necesitan <strong>expresión</strong>, no otro sonido.</p>
+        </div>
+        <div class="sauce-card">
+          <span class="nugget">◆ Salsa 04 · racks</span>
+          <h4>Un macro = una mano sobre el sonido</h4>
+          <p>Mapea <em>reverb + saturación + filtro</em> (o tus delays) a uno o dos macros del rack y controlas todo el carácter del pad con un dedo, en vivo o automatizándolo. Guarda el rack en tu <em>User Library</em> y viaja contigo a todos tus tracks. Empieza tu colección de "armas secretas".</p>
+        </div>
+        <div class="sauce-card">
+          <span class="nugget">◆ Salsa 05 · MIDI FX</span>
+          <h4>Apila MIDI effects y deja que propongan</h4>
+          <p>Arpeggiator → Scale → Chord → Note Echo, en cadena. Tocas una nota y salen frases enteras. <em>No es trampa</em> — es un compañero que tira ideas y tú eliges la buena. Cuando aparezca el oro, <strong>bájalo a audio o congela las notas</strong> para quedártelo.</p>
+        </div>
+        <div class="sauce-card">
+          <span class="nugget">◆ Salsa 06 · Roar</span>
+          <h4>Saturación con criterio, no para ensuciar</h4>
+          <p>Roar (y la saturación en general) no es solo "distorsión". En modo <em>multibanda</em> calienta solo los medios-graves del pad sin tocar el sub — le da cuerpo y presencia para que se siente en la mezcla. Poco y por bandas: ahí está el peso, no en subirlo todo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASA · C2 -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Lo de casa — <em>dale vida a un sonido</em></h2>
+      </div>
+      <p class="section-lead">
+        Sigue con el One Beat Per Day de siempre — no pares la racha. Pero esta semana añádele una capa con la cabeza de hoy.
+      </p>
+      <div class="home-practice">
+        <span class="label">PRÁCTICA DIARIA · MOVIMIENTO</span>
+        <h3>Un beat por día — y a uno de ellos, dale vida.</h3>
+        <p>Mantén el ritual: cada día te sientas y haces algo, aunque sea un loop. <strong>Nunca más de 2 días sin sentarte.</strong> Eso es lo que cuenta.</p>
+        <p>El reto extra de esta semana: agarra <strong>un pad o un sonido sostenido</strong> que tengas y hazlo <em>moverse</em> con lo de hoy. Un 808 disparando un gate. Un filtro automatizado. Un rack con un macro que abras a mano. Que deje de estar plano.</p>
+        <div class="quote">
+          "Un sonido tiene personalidad. Tu trabajo no es buscar el preset perfecto — es darle las herramientas para que se exprese." — lo que vimos hoy.
+        </div>
+        <p><strong>Y el ejercicio de los espacios:</strong> coge dos capas de percusión y haz que una rellene los huecos de la otra. Apaga, mueve, escucha cómo empiezan a rebotar.</p>
+        <p style="margin-top:24px;color:var(--gold);font-size:14.5px;">Para la próxima clase: tráete otro beat. Y avísame qué synth o efecto te pica la curiosidad — la próxima es un <em>deep dive a fondo sobre una sola herramienta</em>.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+<!-- ============ END CLASS 02 PANE ============ -->
+
+<!-- ============ CLASS 01 PANE ============ -->
+<div class="class-pane" id="pane-1">
 
 <!-- ============ LO QUE VIMOS ============ -->
 <section id="vimos">
@@ -831,6 +1037,9 @@
   </div>
 </section>
 
+</div>
+<!-- ============ END CLASS 01 PANE ============ -->
+
 <!-- ============ CHEATSHEET ============ -->
 <section id="atajos">
   <div class="container">
@@ -881,7 +1090,7 @@
       <span class="sep">·</span>
       <span>PARA BENDI</span>
       <span class="sep">·</span>
-      <span>2026-06-05</span>
+      <span>2026-06-11</span>
     </div>
   </div>
 </section>
@@ -1229,6 +1438,22 @@
   // Esc closes
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && activeChip) hidePopup();
+  });
+})();
+
+// ---- Class switcher ----
+(function () {
+  var nav = document.getElementById('classNav');
+  if (!nav) return;
+  var tabs = nav.querySelectorAll('.class-tab');
+  var panes = document.querySelectorAll('.class-pane');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var target = tab.getAttribute('data-pane');
+      tabs.forEach(function (t) { t.classList.toggle('active', t === tab); });
+      panes.forEach(function (p) { p.classList.toggle('active', p.id === target); });
+      window.scrollTo({ top: nav.offsetTop, behavior: 'smooth' });
+    });
   });
 })();
 </script>
